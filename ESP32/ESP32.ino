@@ -12,9 +12,6 @@ void setup() {
   setupDebug();
   setupLC();
   setupBuzzer();
-
-
-
   setupOnline();
   setupDatabase();
   

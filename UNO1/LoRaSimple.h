@@ -11,7 +11,7 @@ void sendLoRa(String s) {
 }
 
 void processDataLoRa(String s) {
-  if (s == "0-1-Request 1") {
+  if (s == "0-1-Request 1" || s.indexOf("0-1") != -1) { // Kiểm tra chính xác hoặc chuỗi chứa "0-1"
     sendLoRa("1-0-LOCATION 1 ONLINE\n");
     connected = true;
     displaySensor();
@@ -31,5 +31,6 @@ void checkLoRa() {
     String data = lora.readStringUntil('\n');
     Serial.println("Received from lora: "+data);
     processDataLoRa(data);
+    displaySensor();
   }
 }

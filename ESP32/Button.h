@@ -18,10 +18,10 @@ String getChipId() {
 void update() {
   String url = "http://otadrive.com/deviceapi/update?";
   url += "k=09197499-fc37-4267-ada6-83a102ac29de";
-  url += "&v=1.0.0.0";
+  url += "&v=1.0.0.2";
   url += "&s=" + getChipId();
   WiFiClient client;
-  httpUpdate.update(client, url, "1.0.0.0");
+  httpUpdate.update(client, url, "1.0.0.2");
   Serial.println(url);
 }
 

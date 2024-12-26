@@ -12,20 +12,21 @@ void checkWarning() {
     Serial.println("Fire");
     sendLoRa("2-0-F-1\n");
     sendLoRa("2-0-D\n");
+    checkLoRa();
     while (!digitalRead(warningPin)) {byte a = 1;}
     buzzerOff();
     sendLoRa("2-0-S\n");
     displaySensor();
-    // delay(30000);
+    delay(10000);
   }
 
-  if (temperature > thresholdTemp || humidity > thresholdHumi || ppm > thresholdAQ) {
+  if (temperature > thresholdTemp || humidity > thresholdHumi || ppm > thresholdAQ || flameState) {
     byte count = 0;
     Serial.println("Temp: "+String(temperature)+" "+String(thresholdTemp));
     Serial.println("Humi: "+String(humidity)+" "+String(thresholdHumi));
     Serial.println("Air: "+String(ppm)+" "+String(thresholdAQ));
     sendLoRa("2-0-D");
-    while (count++ < 10) {
+    while (count++ < 5) {
       checkLoRa();
       buzzerOn();
       delay(1000);
@@ -34,7 +35,8 @@ void checkWarning() {
       if (digitalRead(warningPin)) {
         checkLoRa();
         buzzerOff();
-        // delay(30000);
+        sendLoRa("2-0-S\n");
+        delay(30000);
         break;
       }
     }

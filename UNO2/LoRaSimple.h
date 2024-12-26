@@ -11,16 +11,17 @@ void sendLoRa(String s) {
 }
 
 void processDataLoRa(String s) {
-  if (s == "0-2-Request 2") {
+  if (s == "0-2-Request 2" || s.indexOf("0-2") != -1) {
     sendLoRa("2-0-LOCATION 2 ONLINE\n");
     connected = true;
+    displaySensor();
   }
 
-       if (s.substring(0, 5) == "0-2-T") thresholdTemp = s.substring(6, s.length()).toInt();
+  if (s.substring(0, 5) == "0-2-T") thresholdTemp = s.substring(6, s.length()).toInt();
   else if (s.substring(0, 5) == "0-2-H") thresholdHumi = s.substring(6, s.length()).toInt();
   else if (s.substring(0, 5) == "0-2-A") thresholdAQ = s.substring(6, s.length()).toInt();
   else if (s.substring(0, 5) == "0-2-R" && s.length() < 11) {
-    relayState[String(s[5]).toInt()-1] = s[7] == '1';
+    relayState[String(s[5]).toInt() - 1] = s[7] == '1';
     // Serial.println("relay "+String(s[5])+" state "+String(s[7]));
   }
 }
@@ -28,7 +29,8 @@ void processDataLoRa(String s) {
 void checkLoRa() {
   if (lora.available()) {
     String data = lora.readStringUntil('\n');
-    Serial.println("Received from lora: "+data);
+    Serial.println("Received from lora: " + data);
     processDataLoRa(data);
+    displaySensor();
   }
 }

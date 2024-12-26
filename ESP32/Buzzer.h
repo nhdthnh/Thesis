@@ -2,12 +2,18 @@ const int buzzerPin = 5;
 
 void buzzerOn() {
   // noTone(buzzerPin);
-  analogWrite(buzzerPin, 0);
+  digitalWrite(buzzerPin, 1);
 }
 
 void buzzerOff() {
   // tone(buzzerPin, 1000);
-  analogWrite(buzzerPin, 255);
+  digitalWrite(buzzerPin, 0);
+}
+
+void blinkBuzzer(){
+  buzzerOn();
+  delay(1000);
+  buzzerOff();
 }
 
 void setupBuzzer() {

@@ -28,7 +28,7 @@ void processDataLoRa(String s) {
     else if (s[4] == 'A') { setIntDB(oneURL+"/Sensor/mq135", s.substring(6, s.length()).toInt());       sensorPhase = 6; }
     else if (s[4] == 'F') { setIntDB(oneURL+"/Sensor/flame", s.substring(6, s.length()).toInt());       sensorPhase = 8; }
     else if (s[4] == 'R') { setIntDB(oneURL+"/Relay/device "+s[5], String(s[7]).toInt()); }
-    else if (s[4] == 'D') { displayLC(1, "1 IS DANGER"); buzzerOn(); }
+    else if (s[4] == 'D') { displayLC(1, "1 IS DANGER"); blinkBuzzer();}
     else if (s[4] == 'S') { displayLC(1, String(WiFi.SSID().c_str())); buzzerOff(); }
   }
   else if (connected[1] && s.substring(0, 3) == "2-0") {
@@ -37,7 +37,7 @@ void processDataLoRa(String s) {
     else if (s[4] == 'A') { setIntDB(twoURL+"/Sensor/mq135", s.substring(6, s.length()).toInt());       sensorPhase = 14; }
     else if (s[4] == 'F') { setIntDB(twoURL+"/Sensor/flame", s.substring(6, s.length()).toInt());       sensorPhase = 16; }
     else if (s[4] == 'R') { setIntDB(twoURL+"/Relay/device "+s[5], String(s[7]).toInt()); }
-    else if (s[4] == 'D') { displayLC(2, "2 IS DANGER"); buzzerOn(); }
+    else if (s[4] == 'D') { displayLC(2, "2 IS DANGER"); blinkBuzzer();}
     else if (s[4] == 'S') { displayLC(2, WiFi.localIP().toString()); buzzerOff(); }
   }
 }

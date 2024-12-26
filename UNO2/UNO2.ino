@@ -9,12 +9,18 @@ long temperature = 0, humidity = 0, ppm = 0, thresholdTemp = 1000, thresholdHumi
 void setup() {
   setupButton();
   setupWarning();
-  setupDebug();
   setupRelay();
   setupBuzzer();
+  setupDebug();
+  setupLC();
 
   setupLoRa();
+
+  clearLC();
+  displayLC(1, "Connecting to");
+  displayLC(2, "gateway...");
 }
+
 
 void loop() {
   now = millis();

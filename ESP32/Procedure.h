@@ -1,7 +1,7 @@
 unsigned long requestPhase = 0, preRequest = 0, preSensor = 0;
 
 void checkRequest() {
-  if (now - preRequest >= 5000) {
+  if (now - preRequest >= 10000) {
     // Serial.println("Timeout LoRa request phase"+String(requestPhase));
          if (requestPhase == 1) { setIntDB(oneURL+"/status", 0); requestPhase = 2; }
     else if (requestPhase == 3) { setIntDB(twoURL+"/status", 0); requestPhase = 4; }
